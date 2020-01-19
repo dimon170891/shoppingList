@@ -1,4 +1,6 @@
 # shoppingList
 **JavaGuru 2 main projekt**
-_2020_January_Sunday_
-~~Test text~~
+
+**Now shopping app can:**
+1. Create product
+2. Find product by id

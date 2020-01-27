@@ -1,5 +1,7 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.productService.Product;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;

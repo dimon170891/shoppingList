@@ -1,4 +1,4 @@
-package com.javaguru.shoppinglist;
+package com.javaguru.shoppinglist.productService;
 
 import java.math.BigDecimal;
 
@@ -7,6 +7,12 @@ public class Product {
     private Long id;
     private String name;
     private BigDecimal price;
+    private Category category;
+    public static final Product emptyProduct = new Product();
+
+    public Product(){
+
+    }
 
     public Long getId() {
         return id;
@@ -30,6 +36,10 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
 }

@@ -39,7 +39,7 @@ class ShoppingListApplication {
                         return;
                 }
             } catch (Exception e) {
-                System.out.println("Error! Please try again.");
+                System.out.println("Error! Please try again now.");
             }
         }
     }

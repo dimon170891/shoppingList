@@ -1,4 +1,4 @@
-package com.javaguru.shoppinglist.productService;
+package com.javaguru.shoppinglist.businessLogic;
 
 import com.javaguru.shoppinglist.dataBase.DataBase;
 import com.javaguru.shoppinglist.validation.ProductFieldsValidationException;

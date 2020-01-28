@@ -1,7 +1,7 @@
 package com.javaguru.shoppinglist.dataBase;
 
-import com.javaguru.shoppinglist.productService.Category;
-import com.javaguru.shoppinglist.productService.Product;
+import com.javaguru.shoppinglist.businessLogic.Category;
+import com.javaguru.shoppinglist.businessLogic.Product;
 
 import java.util.ArrayList;
 import java.util.List;

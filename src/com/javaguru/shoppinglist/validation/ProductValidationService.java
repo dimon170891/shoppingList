@@ -1,7 +1,7 @@
 package com.javaguru.shoppinglist.validation;
 
-import com.javaguru.shoppinglist.productService.Product;
-import com.javaguru.shoppinglist.productService.ProductService;
+import com.javaguru.shoppinglist.businessLogic.Product;
+import com.javaguru.shoppinglist.businessLogic.ProductService;
 
 public class ProductValidationService {
 

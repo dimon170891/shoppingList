@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.dataBase;
 
-import com.javaguru.shoppinglist.productService.Product;
+import com.javaguru.shoppinglist.businessLogic.Product;
 
 public interface DataBaseInterface {
     void insert(Product product);

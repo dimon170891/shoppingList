@@ -38,26 +38,25 @@ class ShoppingListApplication {
 
     private static void createNewProduct() {
 
-        System.out.println("======   Please enter product name: ");
+        System.out.println("======   Please enter product name! Name cannot be less than 3 characters and more than 32! ");
         String name = KeyboardInput.getKeyboardInputLine();
 
-        System.out.println("======   Please enter product pice in format like 0.00  : ");
+        System.out.println("======   Please enter product pice in format like 0.00 ! Product price must be greater than 0! ");
         BigDecimal priceBD = KeyboardInput.getKeyboardInputBigDecimal();
 
-        System.out.println("======   Please enter product discount from 1 to 99 % in format like 0.00 . If discount == 0 please enter 0: ");
+        System.out.println("======   Please enter product discount  in format like 0.00. Discount cannot be more than 100 percent!");
         BigDecimal discount = KeyboardInput.getKeyboardInputBigDecimal();
 
         ProductService productService = new ProductService();
         Product newProduct = productService.createProduct(name, priceBD, discount);
         productService.writeProductInDataBase(newProduct);
 
-        setCategory(productService, newProduct);
-        setDescription(newProduct);
-
-        System.out.println("======   You created product : ");
-        System.out.println(newProduct.toString());
-
-
+        if (!(newProduct == Product.emptyProduct)) {
+            setCategory(productService, newProduct);
+            setDescription(newProduct);
+            System.out.println("======   You created product : ");
+            System.out.println(newProduct.toString());
+        }
     }
 
 

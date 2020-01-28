@@ -3,7 +3,6 @@ package com.javaguru.shoppinglist.dataBase;
 import com.javaguru.shoppinglist.productService.Category;
 import com.javaguru.shoppinglist.productService.Product;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -20,7 +19,7 @@ public class DataBase implements DataBaseInterface {
         if (dB.contains(insideProduct)) {
             return dB.get(dB.indexOf(insideProduct));
         } else {
-            return new Product("", new BigDecimal("0"), new BigDecimal("0"));
+            return Product.emptyProduct;
         }
 
     }
@@ -33,7 +32,7 @@ public class DataBase implements DataBaseInterface {
         if (!(result.size() == 0)) {
             return result.get(0);
         } else {
-            return new Product("", new BigDecimal("0"), new BigDecimal("0"));
+            return Product.emptyProduct;
         }
 
     }
@@ -55,7 +54,7 @@ public class DataBase implements DataBaseInterface {
         if (!(result.size() == 0)) {
             return result.get(0);
         } else {
-            return new Product("", new BigDecimal("0"), new BigDecimal("0"));
+            return Product.emptyProduct;
         }
 
     }

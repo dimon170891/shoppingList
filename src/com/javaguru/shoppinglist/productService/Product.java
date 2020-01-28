@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public class Product {
 
-
-    public static final Product emptyProduct = new Product("", new BigDecimal(0), new BigDecimal(0));
     public static Long counter = 0L;
+    public static final Product emptyProduct = new Product("", new BigDecimal(0), new BigDecimal(0));
+
     private Long id;
     private String name;
     private BigDecimal price;
@@ -19,9 +19,17 @@ public class Product {
         this.name = name;
         price = priceValue;
         discount = discountValue;
-        id = counter.longValue() + 1;
+        id = counter.longValue();
         counter++;
         category = Category.UNSSIGNED;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
     }
 
     public Long getId() {

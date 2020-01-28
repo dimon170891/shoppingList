@@ -33,18 +33,18 @@ public class KeyboardInput {
     public static BigDecimal getKeyboardInputBigDecimal() {
 
         boolean correctInput = false;
-        BigDecimal priceBD = new BigDecimal(0);
+        BigDecimal number = new BigDecimal(0);
         while (!correctInput) {
             try {
-                String pice = getKeyboardInputLine();
-                priceBD = new BigDecimal(pice);
+                String stringNumber = getKeyboardInputLine();
+                number = new BigDecimal(stringNumber);
                 correctInput = true;
             } catch (NumberFormatException f) {
                 System.out.println("Bad format! Please enter number in format like 0.00!");
                 correctInput = false;
             }
         }
-        return priceBD;
+        return number;
     }
 
 

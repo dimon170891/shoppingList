@@ -37,16 +37,8 @@ public class ProductService {
         return dataBase.getProductList(category);
     }
 
-    public void updateProductInDataBase(Product product) {
-        dataBase.update(product);
-    }
-
     public Product getProducrFromDataBase(Product product) {
         return dataBase.get(product);
-    }
-
-    public void setproductDiscount(Product product, int productDiscount) {
-        product.setDiscount(new BigDecimal(productDiscount));
     }
 
     public void deleteProductFromDataBase(Product product) {

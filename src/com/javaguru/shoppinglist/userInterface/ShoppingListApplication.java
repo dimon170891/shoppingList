@@ -11,35 +11,28 @@ class ShoppingListApplication {
 
     public static void main(String[] args) {
 
-
         MenuNotification.userWelcome();
-        MenuNotification.userMenu();
         mainUserMenu();
         MenuNotification.goodbyeToTheUser();
-
 
     }
 
     public static void mainUserMenu() {
 
-        int userMenuChose = KeyboardInput.getUserNumberInput();
-        if ((userMenuChose >= 1 && userMenuChose <= 4)) {
-
-            while (userMenuChose >= 1 && userMenuChose <= 4) {
-
-                if (userMenuChose == 1) {          //add
-                    createNewProduct();
-                } else if (userMenuChose == 2) {  // get
-                    getProductInformation();
-                } else if (userMenuChose == 3) {  // get list
-                    getProductListByCategory();
-                } else if (userMenuChose == 4) {  // delete
-                    deleteSelectedProduct();
-                }
-                MenuNotification.userMenu();
-                userMenuChose = KeyboardInput.getUserNumberInput();
-
+        int userMenuChose = 1;
+        while (userMenuChose >= 1 && userMenuChose <= 4) {
+            MenuNotification.userMenu();
+            userMenuChose = KeyboardInput.getUserNumberInput();
+            if (userMenuChose == 1) {
+                createNewProduct();
+            } else if (userMenuChose == 2) {
+                getProductInformation();
+            } else if (userMenuChose == 3) {
+                getProductListByCategory();
+            } else if (userMenuChose == 4) {
+                deleteSelectedProduct();
             }
+
         }
     }
 
@@ -60,6 +53,9 @@ class ShoppingListApplication {
 
         setCategory(productService, newProduct);
         setDescription(newProduct);
+
+        System.out.println("======   You created product : ");
+        System.out.println(newProduct.toString());
 
 
     }

@@ -8,13 +8,18 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class ProductService {
-    public static final DataBase dataBase = new DataBase();
+
+    private DataBase dataBase;
+    private ProductValidationService pvs;
+
+    public ProductService(DataBase dataBase, ProductValidationService pvs) {
+        this.dataBase = dataBase;
+        this.pvs = pvs;
+    }
 
     public Product createProduct(String name, BigDecimal priceValue, BigDecimal discountValue) {
-
         try {
             Product newProduct = new Product(name, priceValue, discountValue);
-            ProductValidationService pvs = new ProductValidationService();
             pvs.validate(newProduct);
             return newProduct;
         } catch (ProductFieldsValidationException e) {

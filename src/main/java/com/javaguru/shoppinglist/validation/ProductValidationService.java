@@ -1,9 +1,15 @@
 package com.javaguru.shoppinglist.validation;
 
 import com.javaguru.shoppinglist.businessLogic.Product;
-import com.javaguru.shoppinglist.businessLogic.ProductService;
+import com.javaguru.shoppinglist.dataBase.DataBaseInterface;
 
 public class ProductValidationService {
+
+    private DataBaseInterface db;
+
+    public ProductValidationService(DataBaseInterface db) {
+        this.db = db;
+    }
 
     public void validate(Product product) throws ProductFieldsValidationException {
 
@@ -22,10 +28,8 @@ public class ProductValidationService {
             errorText = errorText + "Discount cannot be more than 100 percent!  \n";
         }
 
-
-        ProductService productService = new ProductService();
-        Product foundProduct = productService.getProducrFromDataBase(product.getName());
-        if (!(foundProduct == Product.emptyProduct)) {
+        Product foundProduct = db.get(product.getName());
+        if (foundProduct != null) {
             errorText = errorText + "In database with ID: " + foundProduct.getId() + " is a product with name: " + foundProduct.getName() + " ! be careful !";
         }
 

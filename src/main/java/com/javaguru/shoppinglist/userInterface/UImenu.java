@@ -9,7 +9,13 @@ import java.util.List;
 
 public class UImenu {
 
-    private static void createNewProduct() {
+    private ProductService productService;
+
+    public UImenu(ProductService productService) {
+        this.productService = productService;
+    }
+
+    private void createNewProduct() {
 
         System.out.println("======   Please enter product name! Name cannot be less than 3 characters and more than 32! ");
         String name = KeyboardInput.getKeyboardInputLine();
@@ -20,7 +26,6 @@ public class UImenu {
         System.out.println("======   Please enter product discount  in format like 0.00. Discount cannot be more than 100 percent!");
         BigDecimal discount = KeyboardInput.getKeyboardInputBigDecimal();
 
-        ProductService productService = new ProductService();
         Product newProduct = productService.createProduct(name, priceBD, discount);
         productService.writeProductInDataBase(newProduct);
 
@@ -32,7 +37,7 @@ public class UImenu {
         }
     }
 
-    private static void setDescription(Product product) {
+    private void setDescription(Product product) {
 
         MenuNotification.descriptionTextQuestion();
 
@@ -44,7 +49,7 @@ public class UImenu {
 
     }
 
-    private static void setCategory(ProductService productService, Product product) {
+    private void setCategory(ProductService productService, Product product) {
 
         MenuNotification.settingCategoryTextQuestion();
 
@@ -70,17 +75,16 @@ public class UImenu {
         return category;
     }
 
-    private static void setProductDescription(Product product) {
+    private void setProductDescription(Product product) {
 
         MenuNotification.descriptionTextSetting();
 
         String description = KeyboardInput.getKeyboardInputLine();
-        ProductService ps = new ProductService();
-        ps.setProductDescription(product, description);
+        productService.setProductDescription(product, description);
 
     }
 
-    private static void getProductInformation() {
+    private void getProductInformation() {
 
         Product receivedProduct = getProductAcrossMenue();
 
@@ -92,12 +96,10 @@ public class UImenu {
 
     }
 
-    private static Product getProductAcrossMenue() {
+    private Product getProductAcrossMenue() {
 
         Product receivedProduct = Product.emptyProduct;
         MenuNotification.gettingProductTextQuestion();
-
-        ProductService productService = new ProductService();
 
         KeyboardInput ki = new KeyboardInput();
 
@@ -115,12 +117,11 @@ public class UImenu {
         return receivedProduct;
     }
 
-    private static void deleteSelectedProduct() {
+    private void deleteSelectedProduct() {
         MenuNotification.productSelectingToDeleteText();
         Product productToDelete = getProductAcrossMenue();
 
         if (!(productToDelete == Product.emptyProduct)) {
-            ProductService productService = new ProductService();
             productService.deleteProductFromDataBase(productToDelete);
             System.out.println("Product " + productToDelete.toString() + "deleted");
         } else {
@@ -129,17 +130,13 @@ public class UImenu {
 
     }
 
-    private static void getProductListByCategory() {
+    private void getProductListByCategory() {
         Category category = getCategoryByMenu();
-        ProductService productService = new ProductService();
         List<Product> productList = productService.getProducrListFromDataBaseByCategory(category);
         System.out.println(productList.toString());
     }
 
     public void mainUserMenu() {
-
-        UImenu uImenu = new UImenu();
-
         int userMenuChose = 1;
         while (userMenuChose >= 1 && userMenuChose <= 4) {
             MenuNotification.userMenu();

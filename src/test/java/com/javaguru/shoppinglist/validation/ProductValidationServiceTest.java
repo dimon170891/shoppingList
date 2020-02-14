@@ -15,18 +15,18 @@ public class ProductValidationServiceTest {
 
     private DataBaseInterface db;
 
-    private ProductValidationService service;
+    private ProductAvailabilityInDatabaseValidation service;
 
     @Before
     public void setup() {
         db = Mockito.mock(DataBaseInterface.class);
-        service = new ProductValidationService(db);
+        service = new ProductAvailabilityInDatabaseValidation(db);
     }
 
     @Test
     public void shouldReturnErrorWhenProductAlreadyExist() {
-        Product testPoduct = new Product("milk", new BigDecimal("33"), new BigDecimal("33"));
 
+        Product testPoduct = new Product("milk", new BigDecimal("33"), new BigDecimal("33"));
         Product foundProduct = new Product("milk", new BigDecimal("11"), new BigDecimal("11"));
         Mockito.when(db.get("milk")).thenReturn(foundProduct);
 
@@ -35,11 +35,10 @@ public class ProductValidationServiceTest {
             fail();
         } catch (ProductFieldsValidationException e) {
 
-            assertEquals(e.getMessage(), "  ====  ERROR === \n" +
-                    "In database with ID: 2 is a product with name: milk ! be careful !");
+            assertEquals(e.getMessage(), "In database with is a product with entered name!");
         }
 
-        Mockito.verify(db).delete(foundProduct);
+        // Mockito.verify(db).delete(foundProduct);
 
     }
 

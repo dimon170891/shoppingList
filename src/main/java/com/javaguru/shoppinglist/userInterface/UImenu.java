@@ -3,6 +3,10 @@ package com.javaguru.shoppinglist.userInterface;
 import com.javaguru.shoppinglist.businessLogic.Category;
 import com.javaguru.shoppinglist.businessLogic.Product;
 import com.javaguru.shoppinglist.businessLogic.ProductService;
+import com.javaguru.shoppinglist.validation.ProductDiscountValidation;
+import com.javaguru.shoppinglist.validation.ProductFieldsValidationException;
+import com.javaguru.shoppinglist.validation.ProductNameLengthValidation;
+import com.javaguru.shoppinglist.validation.ProductPriceValidation;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,21 +14,31 @@ import java.util.List;
 public class UImenu {
 
     private ProductService productService;
+    private static KeyboardInput keyboardInput;
 
-    public UImenu(ProductService productService) {
+    public UImenu(ProductService productService, KeyboardInput keyboardInput) {
         this.productService = productService;
+        this.keyboardInput = keyboardInput;
+
+    }
+
+    private static Category getCategoryByMenu() {
+        Category category = Category.UNSSIGNED;
+        MenuNotification.checkingCategoryText();
+        Category.printCategoryList();
+
+        int userChose = keyboardInput.getUserNumberInput();
+        if (userChose < Category.getCategoryList().size()) {
+            category = (Category) Category.getCategoryList().get(userChose);
+        }
+        return category;
     }
 
     private void createNewProduct() {
 
-        System.out.println("======   Please enter product name! Name cannot be less than 3 characters and more than 32! ");
-        String name = KeyboardInput.getKeyboardInputLine();
-
-        System.out.println("======   Please enter product pice in format like 0.00 ! Product price must be greater than 0! ");
-        BigDecimal priceBD = KeyboardInput.getKeyboardInputBigDecimal();
-
-        System.out.println("======   Please enter product discount  in format like 0.00. Discount cannot be more than 100 percent!");
-        BigDecimal discount = KeyboardInput.getKeyboardInputBigDecimal();
+        String name = getProductName();
+        BigDecimal priceBD = getProductPrice();
+        BigDecimal discount = getProductDiscount();
 
         Product newProduct = productService.createProduct(name, priceBD, discount);
         productService.writeProductInDataBase(newProduct);
@@ -37,12 +51,66 @@ public class UImenu {
         }
     }
 
+    private BigDecimal getProductDiscount() {
+        BigDecimal discount = new BigDecimal("0");
+
+        boolean correctInput = false;
+        while (!correctInput) {
+            try {
+                System.out.println("======   Please enter product discount  in format like 0.00. Discount cannot be more than 100 percent!");
+                discount = keyboardInput.getKeyboardInputBigDecimal();
+
+                ProductDiscountValidation.validate(discount);
+                correctInput = true;
+            } catch (ProductFieldsValidationException f) {
+                System.out.println(f.getMessage());
+                correctInput = false;
+            }
+        }
+        return discount;
+    }
+
+    private BigDecimal getProductPrice() {
+        BigDecimal priceBD = new BigDecimal("0");
+
+        boolean correctInput = false;
+        while (!correctInput) {
+            try {
+                System.out.println("======   Please enter product pice in format like 0.00 ! Product price must be greater than 0! ");
+                priceBD = keyboardInput.getKeyboardInputBigDecimal();
+                ProductPriceValidation.validate(priceBD);
+                correctInput = true;
+            } catch (ProductFieldsValidationException f) {
+                System.out.println(f.getMessage());
+                correctInput = false;
+            }
+        }
+        return priceBD;
+    }
+
+    private String getProductName() {
+        String name = "";
+
+        boolean correctInput = false;
+        while (!correctInput) {
+            try {
+                System.out.println("======   Please enter product name! Name cannot be less than 3 characters and more than 32! ");
+                name = keyboardInput.getKeyboardInputLine();
+                ProductNameLengthValidation.validate(name);
+                correctInput = true;
+            } catch (ProductFieldsValidationException f) {
+                System.out.println(f.getMessage());
+                correctInput = false;
+            }
+        }
+        return name;
+    }
+
     private void setDescription(Product product) {
 
         MenuNotification.descriptionTextQuestion();
 
-        KeyboardInput ki = new KeyboardInput();
-        int userChose = ki.getUserNumberInput();
+        int userChose = keyboardInput.getUserNumberInput();
         if (userChose > 0) {
             setProductDescription(product);
         }
@@ -53,8 +121,8 @@ public class UImenu {
 
         MenuNotification.settingCategoryTextQuestion();
 
-        KeyboardInput ki = new KeyboardInput();
-        int userChose = ki.getUserNumberInput();
+
+        int userChose = keyboardInput.getUserNumberInput();
         if (userChose > 0) {
             Category category = getCategoryByMenu();
             productService.setproductCategory(product, category);
@@ -62,24 +130,11 @@ public class UImenu {
 
     }
 
-    private static Category getCategoryByMenu() {
-        Category category = Category.UNSSIGNED;
-        MenuNotification.checkingCategoryText();
-        Category.printCategoryList();
-
-        KeyboardInput ki = new KeyboardInput();
-        int userChose = ki.getUserNumberInput();
-        if (userChose < Category.getCategoryList().size()) {
-            category = (Category) Category.getCategoryList().get(userChose);
-        }
-        return category;
-    }
-
     private void setProductDescription(Product product) {
 
         MenuNotification.descriptionTextSetting();
 
-        String description = KeyboardInput.getKeyboardInputLine();
+        String description = keyboardInput.getKeyboardInputLine();
         productService.setProductDescription(product, description);
 
     }
@@ -101,17 +156,16 @@ public class UImenu {
         Product receivedProduct = Product.emptyProduct;
         MenuNotification.gettingProductTextQuestion();
 
-        KeyboardInput ki = new KeyboardInput();
 
-        int userChose = ki.getUserNumberInput();
+        int userChose = keyboardInput.getUserNumberInput();
         if (userChose == 1) {
             System.out.println("enter product ID to search ");
-            Long iD = new Long(ki.getUserNumberInput());
+            Long iD = new Long(keyboardInput.getUserNumberInput());
 
             receivedProduct = productService.getProducrFromDataBase(iD);
         } else {
             System.out.println("enter product name to search ");
-            String productName = KeyboardInput.getKeyboardInputLine();
+            String productName = keyboardInput.getKeyboardInputLine();
             receivedProduct = productService.getProducrFromDataBase(productName);
         }
         return receivedProduct;
@@ -141,7 +195,7 @@ public class UImenu {
         while (userMenuChose >= 1 && userMenuChose <= 4) {
             MenuNotification.userMenu();
 
-            userMenuChose = KeyboardInput.getUserNumberInput();
+            userMenuChose = keyboardInput.getUserNumberInput();
 
             if (userMenuChose == 1) {
                 createNewProduct();

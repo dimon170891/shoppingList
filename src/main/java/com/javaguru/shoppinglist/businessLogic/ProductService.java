@@ -1,8 +1,6 @@
 package com.javaguru.shoppinglist.businessLogic;
 
 import com.javaguru.shoppinglist.dataBase.DataBase;
-import com.javaguru.shoppinglist.validation.ProductFieldsValidationException;
-import com.javaguru.shoppinglist.validation.ProductValidationService;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,23 +8,14 @@ import java.util.List;
 public class ProductService {
 
     private DataBase dataBase;
-    private ProductValidationService pvs;
 
-    public ProductService(DataBase dataBase, ProductValidationService pvs) {
+    public ProductService(DataBase dataBase) {
         this.dataBase = dataBase;
-        this.pvs = pvs;
     }
 
     public Product createProduct(String name, BigDecimal priceValue, BigDecimal discountValue) {
-        try {
-            Product newProduct = new Product(name, priceValue, discountValue);
-            pvs.validate(newProduct);
-            return newProduct;
-        } catch (ProductFieldsValidationException e) {
-            System.out.println(e.getMessage());
-            return Product.emptyProduct;
-        }
-
+        Product newProduct = new Product(name, priceValue, discountValue);
+        return newProduct;
     }
 
     public void writeProductInDataBase(Product product) {

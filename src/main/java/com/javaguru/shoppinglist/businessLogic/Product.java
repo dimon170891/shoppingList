@@ -22,6 +22,7 @@ public class Product {
         id = counter.longValue();
         counter++;
         category = Category.UNSSIGNED;
+
     }
 
     public BigDecimal getPrice() {

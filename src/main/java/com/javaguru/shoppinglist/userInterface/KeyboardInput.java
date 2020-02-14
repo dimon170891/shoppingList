@@ -5,15 +5,7 @@ import java.util.Scanner;
 
 public class KeyboardInput {
 
-    public static int getUserNumberInput() {
-
-        Scanner keyReader = new Scanner(System.in);
-        String userChose = keyReader.nextLine();
-
-        return Integer.parseInt(deleteLettersAndSymbols(userChose));
-    }
-
-    public static String deleteLettersAndSymbols(String userChoose) {
+    private static String deleteLettersAndSymbols(String userChoose) {
 
         String stringNumber = userChoose.replaceAll("[^-0-9]", ""); // delete all symbols
         if (stringNumber.isEmpty()) {
@@ -22,7 +14,15 @@ public class KeyboardInput {
         return stringNumber;
     }
 
-    public static String getKeyboardInputLine() {
+    public int getUserNumberInput() {
+
+        Scanner keyReader = new Scanner(System.in);
+        String userChose = keyReader.nextLine();
+
+        return Integer.parseInt(deleteLettersAndSymbols(userChose));
+    }
+
+    public String getKeyboardInputLine() {
 
         Scanner keyReader = new Scanner(System.in);
         String string = keyReader.nextLine();
@@ -30,13 +30,14 @@ public class KeyboardInput {
         return string;
     }
 
-    public static BigDecimal getKeyboardInputBigDecimal() {
+    public BigDecimal getKeyboardInputBigDecimal() {
 
         boolean correctInput = false;
         BigDecimal number = new BigDecimal(0);
         while (!correctInput) {
             try {
-                String stringNumber = getKeyboardInputLine();
+                Scanner keyReader = new Scanner(System.in);
+                String stringNumber = keyReader.nextLine();
                 number = new BigDecimal(stringNumber);
                 correctInput = true;
             } catch (NumberFormatException f) {
@@ -46,6 +47,5 @@ public class KeyboardInput {
         }
         return number;
     }
-
 
 }

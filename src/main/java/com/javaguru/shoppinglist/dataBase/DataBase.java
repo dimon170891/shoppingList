@@ -2,14 +2,15 @@ package com.javaguru.shoppinglist.dataBase;
 
 import com.javaguru.shoppinglist.businessLogic.Category;
 import com.javaguru.shoppinglist.businessLogic.Product;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Component
 public class DataBase implements DataBaseInterface {
-
 
     private List<Product> dB = new ArrayList<>();
 
@@ -19,7 +20,8 @@ public class DataBase implements DataBaseInterface {
         if (dB.contains(insideProduct)) {
             return dB.get(dB.indexOf(insideProduct));
         } else {
-            return Product.emptyProduct;
+            // return Product.emptyProduct;
+            return null;
         }
 
     }
@@ -32,7 +34,8 @@ public class DataBase implements DataBaseInterface {
         if (!(result.size() == 0)) {
             return result.get(0);
         } else {
-            return Product.emptyProduct;
+            //return Product.emptyProduct;
+            return null;
         }
 
     }
@@ -54,7 +57,8 @@ public class DataBase implements DataBaseInterface {
         if (!(result.size() == 0)) {
             return result.get(0);
         } else {
-            return Product.emptyProduct;
+            //return Product.emptyProduct;
+            return null;
         }
 
     }

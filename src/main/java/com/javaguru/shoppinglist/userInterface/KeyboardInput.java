@@ -1,8 +1,11 @@
 package com.javaguru.shoppinglist.userInterface;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+@Component
 public class KeyboardInput {
 
     private static String deleteLettersAndSymbols(String userChoose) {

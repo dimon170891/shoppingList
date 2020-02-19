@@ -1,12 +1,15 @@
 package com.javaguru.shoppinglist.businessLogic;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Component
 public class Product {
 
     public static Long counter = 0L;
-    public static final Product emptyProduct = new Product("", new BigDecimal(0), new BigDecimal(0));
+    // public static final Product emptyProduct = new Product("", new BigDecimal(0), new BigDecimal(0));
 
     private Long id;
     private String name;
@@ -22,6 +25,11 @@ public class Product {
         id = counter.longValue();
         counter++;
         category = Category.UNSSIGNED;
+
+    }
+
+    public Product() {
+
 
     }
 

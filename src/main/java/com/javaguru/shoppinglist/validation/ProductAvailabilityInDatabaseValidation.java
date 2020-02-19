@@ -2,7 +2,9 @@ package com.javaguru.shoppinglist.validation;
 
 import com.javaguru.shoppinglist.businessLogic.Product;
 import com.javaguru.shoppinglist.dataBase.DataBaseInterface;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductAvailabilityInDatabaseValidation {
 
     private DataBaseInterface db;

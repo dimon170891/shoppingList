@@ -7,15 +7,19 @@ import com.javaguru.shoppinglist.validation.ProductDiscountValidation;
 import com.javaguru.shoppinglist.validation.ProductFieldsValidationException;
 import com.javaguru.shoppinglist.validation.ProductNameLengthValidation;
 import com.javaguru.shoppinglist.validation.ProductPriceValidation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Component
 public class UImenu {
 
-    private ProductService productService;
+    private static ProductService productService;
     private static KeyboardInput keyboardInput;
 
+    @Autowired
     public UImenu(ProductService productService, KeyboardInput keyboardInput) {
         this.productService = productService;
         this.keyboardInput = keyboardInput;
@@ -43,7 +47,8 @@ public class UImenu {
         Product newProduct = productService.createProduct(name, priceBD, discount);
         productService.writeProductInDataBase(newProduct);
 
-        if (!(newProduct == Product.emptyProduct)) {
+        //if (!(newProduct == Product.emptyProduct)) {
+        if (!(newProduct == null)) {
             setCategory(productService, newProduct);
             setDescription(newProduct);
             System.out.println("======   You created product : ");
@@ -143,7 +148,8 @@ public class UImenu {
 
         Product receivedProduct = getProductAcrossMenue();
 
-        if (!(receivedProduct == Product.emptyProduct)) {
+        // if (!(receivedProduct == Product.emptyProduct)) {
+        if (!(receivedProduct == null)) {
             System.out.println(receivedProduct.toString());
         } else {
             System.out.println("Product dont search!");
@@ -153,7 +159,7 @@ public class UImenu {
 
     private Product getProductAcrossMenue() {
 
-        Product receivedProduct = Product.emptyProduct;
+        Product receivedProduct;
         MenuNotification.gettingProductTextQuestion();
 
 
@@ -175,7 +181,8 @@ public class UImenu {
         MenuNotification.productSelectingToDeleteText();
         Product productToDelete = getProductAcrossMenue();
 
-        if (!(productToDelete == Product.emptyProduct)) {
+        //if (!(productToDelete == Product.emptyProduct)) {
+        if (!(productToDelete == null)) {
             productService.deleteProductFromDataBase(productToDelete);
             System.out.println("Product " + productToDelete.toString() + "deleted");
         } else {

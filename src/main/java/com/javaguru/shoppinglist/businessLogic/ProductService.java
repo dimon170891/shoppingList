@@ -1,20 +1,25 @@
 package com.javaguru.shoppinglist.businessLogic;
 
 import com.javaguru.shoppinglist.dataBase.DataBase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Component
 public class ProductService {
 
     private DataBase dataBase;
 
+    @Autowired
     public ProductService(DataBase dataBase) {
         this.dataBase = dataBase;
     }
 
     public Product createProduct(String name, BigDecimal priceValue, BigDecimal discountValue) {
         Product newProduct = new Product(name, priceValue, discountValue);
+
         return newProduct;
     }
 

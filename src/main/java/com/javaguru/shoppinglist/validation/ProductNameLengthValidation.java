@@ -1,5 +1,8 @@
 package com.javaguru.shoppinglist.validation;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ProductNameLengthValidation {
 
     public static void validate(String productName) throws ProductFieldsValidationException {

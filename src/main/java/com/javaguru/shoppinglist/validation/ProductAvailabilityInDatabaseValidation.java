@@ -15,9 +15,11 @@ public class ProductAvailabilityInDatabaseValidation {
 
     public boolean validate(Product product) throws ProductFieldsValidationException {
 
+        if (product == null) {
+            throw new ProductFieldsValidationException("received data == null ");
+        }
         Product foundProduct = db.get(product.getName());
         if (foundProduct != null) {
-//            throw  new ProductFieldsValidationException("In database with ID: " + foundProduct.getId() + " is a product with name: " + foundProduct.getName() + " ! be careful !");
             throw new ProductFieldsValidationException("In database with is a product with entered name!");
 
         }

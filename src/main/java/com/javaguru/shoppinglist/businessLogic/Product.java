@@ -1,11 +1,13 @@
 package com.javaguru.shoppinglist.businessLogic;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Component
+@Scope("prototype")
 public class Product {
 
     public static Long counter = 0L;

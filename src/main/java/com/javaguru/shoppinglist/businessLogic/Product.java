@@ -3,36 +3,43 @@ package com.javaguru.shoppinglist.businessLogic;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Component
-@Scope("prototype")
+@Entity
+@Table(name = "Product")
 public class Product {
 
-    public static Long counter = 0L;
+   // public static Long counter = 0L;
     // public static final Product emptyProduct = new Product("", new BigDecimal(0), new BigDecimal(0));
-
+   @Id
+   @Column(name = "id")
+   @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "price")
     private BigDecimal price;
+    @Column(name = "category")
     private Category category;
+    @Column(name = "discount")
     private BigDecimal discount;
+    @Column(name = "description")
     private String description;
 
     public Product(String name, BigDecimal priceValue, BigDecimal discountValue) {
         this.name = name;
         price = priceValue;
         discount = discountValue;
-        id = counter.longValue();
-        counter++;
+       // id = counter.longValue();
+      //  counter++;
         category = Category.UNSSIGNED;
 
     }
 
-    public Product() {
-
-
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {

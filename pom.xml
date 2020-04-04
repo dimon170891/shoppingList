@@ -10,7 +10,61 @@
     <properties>
         <java.version>10</java.version>
     </properties>
+
+    https://mvnrepository.com/repos/central
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>my-repo1</id>-->
+<!--            <name>your custom repo</name>-->
+<!--            <url>http://maven.icm.edu.pl/artifactory/repo/</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
+
+    <repositories>
+        <repository>
+            <id>edu-repo</id>
+            <name>Maven edu</name>
+            <url>https://maven.xwiki.org/externals</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>4.3.10.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>4.3.10.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.3.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.5.Final</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.oracle.jdbc/ojdbc8 -->
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>12.2.0.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
@@ -33,13 +87,20 @@
             <version>5.2.3.RELEASE</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.2.3.RELEASE</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
+
+
     <build>
         <plugins>
             <plugin>

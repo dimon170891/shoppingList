@@ -1,6 +1,7 @@
 package com.javaguru.shoppinglist.businessLogic;
 
-import com.javaguru.shoppinglist.dataBase.DataBase;
+import com.javaguru.shoppinglist.dataBase.DataBaseInmemory;
+import com.javaguru.shoppinglist.dataBase.DataBaseInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +11,10 @@ import java.util.List;
 @Component
 public class ProductService {
 
-    private DataBase dataBase;
+    private DataBaseInterface dataBase;
 
     @Autowired
-    public ProductService(DataBase dataBase) {
+    public ProductService(DataBaseInmemory dataBase) {
         this.dataBase = dataBase;
     }
 

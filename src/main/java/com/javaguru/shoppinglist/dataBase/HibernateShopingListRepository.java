@@ -12,12 +12,12 @@ import java.util.Optional;
 
 @Component
 @Profile("hibernate")
-public class HibernateRepository implements DataBaseInterface {
+public class HibernateShopingListRepository implements DataBaseInterface {
 
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public HibernateRepository(SessionFactory sessionFactory) {
+    public HibernateShopingListRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

@@ -11,7 +11,8 @@ class ShoppingListApplication {
     public static void main(String[] args) {
 
         MenuNotification.userWelcome();
-        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        ApplicationContext context;
+        context = new AnnotationConfigApplicationContext(AppConfig.class);
 
         UImenu uImenu = context.getBean(UImenu.class);
         uImenu.mainUserMenu();

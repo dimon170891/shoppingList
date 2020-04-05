@@ -22,7 +22,7 @@ public class DataBaseInmemory implements DataBaseInterface {
     public Optional<Product> get(Product insideProduct) {
 
         if (dB.contains(insideProduct)) {
-            return dB.get(dB.indexOf(insideProduct));
+            return Optional.ofNullable(dB.get(dB.indexOf(insideProduct)));
         } else {
             // return Product.emptyProduct;
             return null;
@@ -36,10 +36,10 @@ public class DataBaseInmemory implements DataBaseInterface {
         Predicate<Product> byName = product -> product.getName().equals(productName);
         var result = dB.stream().filter(byName).collect(Collectors.toList());
         if (!(result.size() == 0)) {
-            return result.get(0);
+            return Optional.ofNullable(result.get(0));
         } else {
             //return Product.emptyProduct;
-            return null;
+            return Optional.empty();
         }
 
     }
@@ -59,10 +59,10 @@ public class DataBaseInmemory implements DataBaseInterface {
         Predicate<Product> byId = product -> product.getId().equals(productID);
         var result = dB.stream().filter(byId).collect(Collectors.toList());
         if (!(result.size() == 0)) {
-            return result.get(0);
+            return Optional.ofNullable(result.get(0));
         } else {
             //return Product.emptyProduct;
-            return null;
+            return Optional.empty();
         }
 
     }

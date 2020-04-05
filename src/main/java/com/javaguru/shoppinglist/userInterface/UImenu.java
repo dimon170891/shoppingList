@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UImenu {
@@ -146,7 +147,7 @@ public class UImenu {
 
     private void getProductInformation() {
 
-        Product receivedProduct = getProductAcrossMenue();
+        Optional<Product> receivedProduct = getProductAcrossMenue();
 
         // if (!(receivedProduct == Product.emptyProduct)) {
         if (!(receivedProduct == null)) {
@@ -157,9 +158,9 @@ public class UImenu {
 
     }
 
-    private Product getProductAcrossMenue() {
+    private Optional<Product> getProductAcrossMenue() {
 
-        Product receivedProduct;
+        Optional<Product> receivedProduct;
         MenuNotification.gettingProductTextQuestion();
 
 
@@ -179,7 +180,7 @@ public class UImenu {
 
     private void deleteSelectedProduct() {
         MenuNotification.productSelectingToDeleteText();
-        Product productToDelete = getProductAcrossMenue();
+        Optional<Product> productToDelete = getProductAcrossMenue();
 
         //if (!(productToDelete == Product.emptyProduct)) {
         if (!(productToDelete == null)) {

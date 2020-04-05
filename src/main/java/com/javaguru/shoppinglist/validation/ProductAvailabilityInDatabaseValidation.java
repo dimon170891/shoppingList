@@ -4,6 +4,8 @@ import com.javaguru.shoppinglist.businessLogic.Product;
 import com.javaguru.shoppinglist.dataBase.DataBaseInterface;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class ProductAvailabilityInDatabaseValidation {
 
@@ -18,7 +20,7 @@ public class ProductAvailabilityInDatabaseValidation {
         if (product == null) {
             throw new ProductFieldsValidationException("received data == null ");
         }
-        Product foundProduct = db.get(product.getName());
+        Optional<Product> foundProduct = db.get(product.getName());
         if (foundProduct != null) {
             throw new ProductFieldsValidationException("In database with is a product with entered name!");
 

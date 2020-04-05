@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProductService {
@@ -36,11 +37,11 @@ public class ProductService {
         product.setCategory(category);
     }
 
-    public Product getProducrFromDataBase(Long productID) {
+    public Optional<Product> getProducrFromDataBase(Long productID) {
         return dataBase.get(productID);
     }
 
-    public Product getProducrFromDataBase(String productName) {
+    public Optional<Product> getProducrFromDataBase(String productName) {
         return dataBase.get(productName);
     }
 
@@ -48,11 +49,11 @@ public class ProductService {
         return dataBase.getProductList(category);
     }
 
-    public Product getProducrFromDataBase(Product product) {
+    public Optional<Product> getProducrFromDataBase(Product product) {
         return dataBase.get(product);
     }
 
-    public void deleteProductFromDataBase(Product product) {
+    public void deleteProductFromDataBase(Optional<Product> product) {
         dataBase.delete(product);
     }
 

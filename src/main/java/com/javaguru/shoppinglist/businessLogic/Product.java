@@ -1,8 +1,5 @@
 package com.javaguru.shoppinglist.businessLogic;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -37,6 +34,11 @@ public class Product {
         category = Category.UNSSIGNED;
 
     }
+
+    public Product() {
+
+    }
+
 
     public void setId(Long id) {
         this.id = id;

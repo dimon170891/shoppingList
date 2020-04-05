@@ -33,7 +33,7 @@ public class DataBaseOracle implements DataBaseInterface {
         List<Product> products = jdbcTemplate.query(query,
                 new BeanPropertyRowMapper(Product.class), insideProduct.getId());
         if (!products.isEmpty()) {
-            return products.get(0);
+            return Optional.ofNullable(products.get(0));
         }
         return null;
 
@@ -47,9 +47,9 @@ public class DataBaseOracle implements DataBaseInterface {
         List<Product> products = jdbcTemplate.query(query,
                 new BeanPropertyRowMapper(Product.class), productName);
         if (!products.isEmpty()) {
-            return products.get(0);
+            return Optional.ofNullable(products.get(0));
         }
-        return null;
+        return Optional.empty();
 
     }
 
@@ -58,9 +58,9 @@ public class DataBaseOracle implements DataBaseInterface {
         List<Product> products = jdbcTemplate.query(query,
                 new BeanPropertyRowMapper(Product.class), category);
         if (!products.isEmpty()) {
-            return products;
+            return Optional.ofNullable(products.get(0));
         }
-        return null;
+        return Optional.empty();
 
     }
 
@@ -72,9 +72,9 @@ public class DataBaseOracle implements DataBaseInterface {
         List<Product> products = jdbcTemplate.query(query,
                 new BeanPropertyRowMapper(Product.class), productID);
         if (!products.isEmpty()) {
-            return products.get(0);
+            return Optional.ofNullable(products.get(0));
         }
-        return null;
+        return Optional.empty();
 
     }
 

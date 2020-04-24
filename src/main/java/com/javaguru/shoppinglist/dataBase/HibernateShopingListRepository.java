@@ -52,11 +52,16 @@ public class HibernateShopingListRepository implements DataBaseInterface {
     @Override
     public Optional<Product> get(Long productID) {
 
-         Product product = (Product) sessionFactory.getCurrentSession().createCriteria(Product.class)
+        Product product = (Product) sessionFactory.getCurrentSession().createCriteria(Product.class)
                 .add(Restrictions.eq("id", productID))
                 .uniqueResult();
         return Optional.ofNullable(product);
 
+    }
+
+    @Override
+    public void delete(Product product) {
+        sessionFactory.getCurrentSession().delete(product);
     }
 
 
@@ -65,10 +70,10 @@ public class HibernateShopingListRepository implements DataBaseInterface {
         sessionFactory.getCurrentSession().save(product);
     }
 
-
     @Override
-    public void delete(Product product) {
+    public void delete(Optional<Product> product) {
         sessionFactory.getCurrentSession().delete(product);
     }
+
 
 }

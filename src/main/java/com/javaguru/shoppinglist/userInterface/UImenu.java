@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -194,7 +193,7 @@ public class UImenu {
 
     private void getProductListByCategory() {
         Category category = getCategoryByMenu();
-        List<Product> productList = productService.getProducrListFromDataBaseByCategory(category);
+        Optional<Product> productList = productService.getProducrListFromDataBaseByCategory(category);
         System.out.println(productList.toString());
     }
 

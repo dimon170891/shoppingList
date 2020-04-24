@@ -100,10 +100,22 @@ public class DataBaseOracle implements DataBaseInterface {
 
     }
 
+    @Override
+    public void delete(Optional<Product> product) {
+
+        String query = "delete * from tasks where id=?";
+        jdbcTemplate.query(query,
+                new BeanPropertyRowMapper(Product.class), product.get().getId());
+
+
+    }
+
 
     @Override
     public void delete(Product product) {
-      //  dB.remove(product);
+        String query = "delete * from tasks where id=?";
+        jdbcTemplate.query(query,
+                new BeanPropertyRowMapper(Product.class), product.getId());
     }
 
 }

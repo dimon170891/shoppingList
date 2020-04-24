@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -45,7 +44,7 @@ public class ProductService {
         return dataBase.get(productName);
     }
 
-    public List<Product> getProducrListFromDataBaseByCategory(Category category) {
+    public Optional<Product> getProducrListFromDataBaseByCategory(Category category) {
         return dataBase.getProductList(category);
     }
 

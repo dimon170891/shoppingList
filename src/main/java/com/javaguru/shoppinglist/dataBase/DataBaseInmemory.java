@@ -34,7 +34,8 @@ public class DataBaseInmemory implements DataBaseInterface {
     public Optional<Product> get(String productName) {
 
         Predicate<Product> byName = product -> product.getName().equals(productName);
-        var result = dB.stream().filter(byName).collect(Collectors.toList());
+
+        List<Product> result = dB.stream().filter(byName).collect(Collectors.toList());
         if (!(result.size() == 0)) {
             return Optional.ofNullable(result.get(0));
         } else {
@@ -46,9 +47,10 @@ public class DataBaseInmemory implements DataBaseInterface {
 
     public Optional<Product> getProductList(Category category) {
 
-        return dB.stream()
+        List<Product> products = dB.stream()
                 .filter(product -> product.getCategory().equals(category))
                 .collect(Collectors.toList());
+        return (Optional<Product>) Optional.ofNullable(products.get(0));
 
     }
 
@@ -72,6 +74,11 @@ public class DataBaseInmemory implements DataBaseInterface {
     public void insert(Product product) {
         product.setId(taskIdSequence++);
         dB.add(product);
+    }
+
+    @Override
+    public void delete(Optional<Product> product) {
+        dB.remove(product);
     }
 
 

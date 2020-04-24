@@ -1,9 +1,9 @@
 package com.javaguru.shoppinglist.businessLogic;
 
-import com.javaguru.shoppinglist.dataBase.DataBaseInmemory;
 import com.javaguru.shoppinglist.dataBase.DataBaseInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -14,10 +14,11 @@ public class ProductService {
     private DataBaseInterface dataBase;
 
     @Autowired
-    public ProductService(DataBaseInmemory dataBase) {
+    public ProductService(DataBaseInterface dataBase) {
         this.dataBase = dataBase;
     }
 
+    @Transactional
     public Product createProduct(String name, BigDecimal priceValue, BigDecimal discountValue) {
         Product newProduct = new Product(name, priceValue, discountValue);
 

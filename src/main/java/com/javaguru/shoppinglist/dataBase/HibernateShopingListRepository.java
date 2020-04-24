@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Component
 @Profile("hibernate")
-public class HibernateShopingListRepository implements DataBaseInterface {
+class HibernateShopingListRepository implements DataBaseInterface {
 
     private final SessionFactory sessionFactory;
 

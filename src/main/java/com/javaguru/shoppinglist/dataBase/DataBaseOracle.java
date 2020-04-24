@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Component
 @Profile("Oracle")
-public class DataBaseOracle implements DataBaseInterface {
+class DataBaseOracle implements DataBaseInterface {
 
     private final JdbcTemplate jdbcTemplate;
 

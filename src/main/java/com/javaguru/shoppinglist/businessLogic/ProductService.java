@@ -11,7 +11,7 @@ import java.util.Optional;
 @Component
 public class ProductService {
 
-    private DataBaseInterface dataBase;
+    private final DataBaseInterface dataBase;
 
     @Autowired
     public ProductService(DataBaseInterface dataBase) {
@@ -47,10 +47,6 @@ public class ProductService {
 
     public Optional<Product> getProducrListFromDataBaseByCategory(Category category) {
         return dataBase.getProductList(category);
-    }
-
-    public Optional<Product> getProducrFromDataBase(Product product) {
-        return dataBase.get(product);
     }
 
     public void deleteProductFromDataBase(Optional<Product> product) {
